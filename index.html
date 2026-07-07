@@ -150,11 +150,12 @@
     .btn-lg { padding: 16px 24px; font-size: 17px; }
     .btn-md { padding: 14px 20px; font-size: 15px; }
     button, .nav-item, .cursor-pointer { cursor: pointer; pointer-events: auto; position: relative; z-index: 1; }
-    #monetag-ad-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 9999; display: none; justify-content: center; align-items: center; flex-direction: column; }
+    #monetag-ad-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 9999; display: none; flex-direction: column; }
     #monetag-ad-container.active { display: flex; }
-    #monetag-ad-close { position: absolute; top: 20px; right: 20px; background: #EF4444; color: white; border: none; padding: 12px 24px; border-radius: 30px; font-size: 16px; font-weight: 700; cursor: pointer; z-index: 10000; }
-    .ad-timer { color: white; font-size: 24px; font-weight: 700; margin-bottom: 20px; text-align: center; }
+    #monetag-ad-close { position: absolute; top: 20px; right: 20px; background: #EF4444; color: white; border: none; padding: 12px 24px; border-radius: 30px; font-size: 16px; font-weight: 700; cursor: pointer; z-index: 10001; }
+    .ad-timer { color: white; font-size: 24px; font-weight: 700; margin: 20px 0; text-align: center; }
     .ad-reward-notice { color: #22C55E; font-size: 18px; font-weight: 600; text-align: center; margin-top: 15px; }
+    #monetag-ad-placeholder { flex: 1; display: flex; align-items: center; justify-content: center; min-height: 400px; }
     .loading-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.98); z-index: 99999; display: flex; justify-content: center; align-items: center; flex-direction: column; gap: 20px; }
     .loading-spinner { width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.1); border-top-color: #06B6D4; border-radius: 50%; animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
@@ -167,16 +168,18 @@
     <p style="color: white; font-size: 18px; font-weight: 600;">Loading...</p>
   </div>
 
+  <!-- Monetag Ad Container - UPDATED -->
   <div id="monetag-ad-container">
-    <button id="monetag-ad-close" onclick="closeMonetagAd()">✕ Close</button>
-    <div style="width: 100%; max-width: 500px; padding: 20px;">
-      <div class="ad-timer" id="ad-timer">⏱️ Watch for <span id="timer-seconds">30</span>s to earn ৳5</div>
-      <div style="background: #1E293B; border-radius: 16px; padding: 40px; text-align: center; min-height: 250px;">
-        <i class="fas fa-ad text-6xl text-cyan-400"></i>
-        <p style="color: white; font-size: 18px; font-weight: 600; margin-top: 15px;">📢 Monetag Ad</p>
+    <button id="monetag-ad-close" onclick="closeMonetagAd()">✕ Close Ad</button>
+    <div class="ad-timer" id="ad-timer">⏱️ Please wait <span id="timer-seconds">30</span> seconds to earn ৳<span id="ad-reward-display">5</span></div>
+    <div id="monetag-ad-placeholder">
+      <div style="text-align: center; color: #94A3B8;">
+        <i class="fas fa-ad text-5xl mb-4" style="color: #06B6D4;"></i>
+        <p style="font-size: 18px; font-weight: 600; color: white;">Loading Advertisement...</p>
+        <p style="font-size: 14px; margin-top: 8px;">Please wait while the ad loads</p>
       </div>
-      <div class="ad-reward-notice" id="ad-reward-notice" style="display: none;">✅ +৳5 added!</div>
     </div>
+    <div class="ad-reward-notice" id="ad-reward-notice" style="display: none;">✅ Congratulations! +৳<span id="ad-reward-done">5</span> added to your balance!</div>
   </div>
 
   <div id="app-container">
@@ -194,7 +197,6 @@
 
     <main class="main-content">
       
-      <!-- Dashboard Screen -->
       <div id="dashboard-screen" class="screen active">
         <div class="glass-card p-6 mb-4 animate-float cursor-pointer" onclick="navigateTo('wallet')">
           <div class="flex justify-between items-start mb-5">
@@ -232,7 +234,6 @@
         <div class="glass-card p-5 mb-4"><h3 class="text-card-title mb-4">🕒 Recent Activities</h3><div class="space-y-4" id="recent-activities"><p class="text-slate-400 text-sm">No activities yet</p></div></div>
       </div>
 
-      <!-- Tasks Screen -->
       <div id="tasks-screen" class="screen">
         <h2 class="text-2xl font-bold mb-5 flex items-center gap-3"><i class="fas fa-tasks text-cyan-400"></i> Daily Tasks</h2>
         <div class="space-y-4 mb-6" id="tasks-container"><p class="text-slate-400 text-center py-8">Loading tasks...</p></div>
@@ -240,7 +241,6 @@
         <div class="space-y-4" id="offerwall-container"><p class="text-slate-400 text-center py-8">Loading offers...</p></div>
       </div>
 
-      <!-- Wallet Screen -->
       <div id="wallet-screen" class="screen">
         <div class="glass-card p-8 text-center mb-5">
           <div class="w-24 h-24 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-5"><i class="fas fa-wallet icon-xl text-white"></i></div>
@@ -252,7 +252,6 @@
         <div class="glass-card p-5"><h3 class="text-card-title mb-4">📋 Transaction History</h3><div class="space-y-4 text-base" id="transaction-history"><p class="text-slate-400 text-sm">No transactions yet</p></div></div>
       </div>
 
-      <!-- Withdraw Screen -->
       <div id="withdraw-screen" class="screen">
         <h2 class="text-2xl font-bold mb-5 flex items-center gap-3"><i class="fas fa-paper-plane text-cyan-400"></i> Withdraw Funds</h2>
         <div class="glass-card p-6 space-y-5">
@@ -268,7 +267,6 @@
         </div>
       </div>
 
-      <!-- Referral Screen -->
       <div id="referral-screen" class="screen">
         <h2 class="text-2xl font-bold mb-5 flex items-center gap-3"><i class="fas fa-users text-purple-400"></i> Referral Program</h2>
         <div class="glass-card p-6 text-center mb-5">
@@ -280,10 +278,8 @@
         <div class="glass-card p-5"><h3 class="text-card-title mb-4">📈 Multi-Level Stats</h3><div class="space-y-4 text-base"><div class="flex justify-between font-semibold"><span>Level 1 (Direct)</span><span>0 refs • ৳0</span></div><div class="flex justify-between font-semibold"><span>Level 2</span><span>0 refs • ৳0</span></div></div></div>
       </div>
 
-      <!-- Notifications Screen -->
       <div id="notifications-screen" class="screen"><h2 class="text-2xl font-bold mb-5"><i class="fas fa-bell text-yellow-400"></i> Notifications</h2><div class="glass-card p-5"><p class="text-center text-slate-400">No new notifications</p></div></div>
 
-      <!-- Profile Screen -->
       <div id="profile-screen" class="screen">
         <div class="glass-card p-7 text-center mb-5">
           <img id="profile-pic-large" src="https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner" alt="Profile" class="w-28 h-28 rounded-full border-4 border-cyan-400 mx-auto">
@@ -339,6 +335,95 @@
       settings: { perAdReward: 5, minWithdraw: 840, maxWithdraw: 42000, requiredRefs: 0 }
     };
 
+    // ============ MONETAG AD FUNCTIONS - FIXED ============
+    let adTimer, adSec, adCompleted = false;
+    
+    function openMonetagAd() {
+      const container = document.getElementById('monetag-ad-container');
+      container.classList.add('active');
+      adSec = 30;
+      adCompleted = false;
+      
+      document.getElementById('timer-seconds').textContent = adSec;
+      document.getElementById('ad-reward-display').textContent = State.settings.perAdReward;
+      document.getElementById('ad-reward-done').textContent = State.settings.perAdReward;
+      document.getElementById('ad-reward-notice').style.display = 'none';
+      document.getElementById('ad-timer').style.display = 'block';
+      
+      // Load Monetag ad in the placeholder
+      const placeholder = document.getElementById('monetag-ad-placeholder');
+      placeholder.innerHTML = '<div id="monetag-ad-content" style="width:100%;height:100%;min-height:300px;"></div>';
+      
+      // Trigger Monetag SDK to show ad
+      if (typeof window.show_11254306 === 'function') {
+        window.show_11254306();
+      }
+      
+      // Start countdown timer
+      adTimer = setInterval(() => {
+        adSec--;
+        document.getElementById('timer-seconds').textContent = adSec;
+        
+        if (adSec <= 0) {
+          clearInterval(adTimer);
+          rewardUserForAd();
+        }
+      }, 1000);
+    }
+
+    function rewardUserForAd() {
+      if (adCompleted) return;
+      adCompleted = true;
+      
+      const reward = State.settings.perAdReward;
+      State.balance += reward;
+      State.todayEarnings += reward;
+      State.totalEarned += reward;
+      
+      updateBalanceUI();
+      
+      db.ref('users/' + State.userId).update({
+        balance: State.balance,
+        todayEarnings: State.todayEarnings,
+        totalEarned: State.totalEarned
+      });
+      
+      db.ref('users/' + State.userId + '/transactions').push({
+        type: 'credit',
+        amount: reward,
+        description: '📺 Watched Ad',
+        date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      });
+      
+      document.getElementById('ad-timer').style.display = 'none';
+      document.getElementById('ad-reward-notice').style.display = 'block';
+      
+      setTimeout(closeMonetagAd, 3000);
+    }
+
+    function closeMonetagAd() {
+      const container = document.getElementById('monetag-ad-container');
+      container.classList.remove('active');
+      
+      if (adTimer) {
+        clearInterval(adTimer);
+        adTimer = null;
+      }
+      
+      if (!adCompleted && adSec > 0) {
+        alert('⚠️ Please wait for the ad to complete to earn your reward!');
+      }
+      
+      // Reset
+      adSec = 30;
+      adCompleted = false;
+      document.getElementById('timer-seconds').textContent = '30';
+      document.getElementById('ad-reward-notice').style.display = 'none';
+      document.getElementById('ad-timer').style.display = 'block';
+    }
+
+    // ============ REST OF THE CODE (UNCHANGED) ============
+    
     function getTelegramUser() {
       if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
         const u = window.Telegram.WebApp.initDataUnsafe.user;
@@ -356,6 +441,8 @@
           State.settings.minWithdraw = snap.val().minWithdraw || 840;
           State.settings.maxWithdraw = snap.val().maxWithdraw || 42000;
           State.settings.requiredRefs = snap.val().requiredRefs || 0;
+          document.getElementById('ad-reward-display').textContent = State.settings.perAdReward;
+          document.getElementById('ad-reward-done').textContent = State.settings.perAdReward;
         }
       });
     }
@@ -478,19 +565,6 @@
       Object.values(sc).forEach(s=>{if(s)s.classList.remove('active');});
       const t=sc[screens[key]]; if(t) { t.classList.add('active'); ni.forEach(i=>{i.classList.remove('active');if(i.dataset.screen===key)i.classList.add('active');}); if(key==='withdraw')document.getElementById('available-balance').textContent=State.balance.toLocaleString(); window.scrollTo({top:0,behavior:'instant'}); }
     }
-
-    let adTimer, adSec;
-    function openMonetagAd() {
-      document.getElementById('monetag-ad-container').classList.add('active'); adSec=30;
-      document.getElementById('timer-seconds').textContent=adSec; document.getElementById('ad-reward-notice').style.display='none'; document.getElementById('ad-timer').style.display='block';
-      adTimer=setInterval(()=>{adSec--;document.getElementById('timer-seconds').textContent=adSec;if(adSec<=0){clearInterval(adTimer);
-        const reward=State.settings.perAdReward;
-        State.balance+=reward;State.todayEarnings+=reward;State.totalEarned+=reward;updateBalanceUI();
-        db.ref('users/'+State.userId).update({balance:State.balance,todayEarnings:State.todayEarnings,totalEarned:State.totalEarned});
-        db.ref('users/'+State.userId+'/transactions').push({type:'credit',amount:reward,description:'📺 Watched Ad',date:new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})});
-        document.getElementById('ad-timer').style.display='none';document.getElementById('ad-reward-notice').style.display='block';setTimeout(closeMonetagAd,3000);}},1000);
-    }
-    function closeMonetagAd() { document.getElementById('monetag-ad-container').classList.remove('active'); if(adTimer)clearInterval(adTimer); }
 
     function handleSupportClick() { window.open(WHATSAPP,'_blank'); }
     function handleWithdrawMethod(m) { State.selectedMethod=m; document.querySelectorAll('.method-btn').forEach(b=>{b.classList.remove('bg-cyan-500/20','border-cyan-500/30');b.classList.add('bg-slate-700/50','border-slate-600/30');}); const s=document.querySelector(`.method-btn[onclick*="${m}"]`); if(s){s.classList.remove('bg-slate-700/50','border-slate-600/30');s.classList.add('bg-cyan-500/20','border-cyan-500/30');} }
