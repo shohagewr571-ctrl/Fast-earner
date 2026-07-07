@@ -164,20 +164,18 @@
 
   <div id="loading-overlay" class="loading-overlay">
     <div class="loading-spinner"></div>
-    <p style="color: white; font-size: 18px; font-weight: 600;">Connecting to Firebase...</p>
+    <p style="color: white; font-size: 18px; font-weight: 600;">Loading...</p>
   </div>
 
   <div id="monetag-ad-container">
     <button id="monetag-ad-close" onclick="closeMonetagAd()">✕ Close</button>
     <div style="width: 100%; max-width: 500px; padding: 20px;">
-      <div class="ad-timer" id="ad-timer">⏱️ Watch for <span id="timer-seconds">30</span> seconds to earn ৳5</div>
-      <div style="background: #1E293B; border-radius: 16px; padding: 40px; text-align: center; min-height: 250px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 15px;">
+      <div class="ad-timer" id="ad-timer">⏱️ Watch for <span id="timer-seconds">30</span>s to earn ৳5</div>
+      <div style="background: #1E293B; border-radius: 16px; padding: 40px; text-align: center; min-height: 250px;">
         <i class="fas fa-ad text-6xl text-cyan-400"></i>
-        <p style="color: white; font-size: 18px; font-weight: 600;">📢 Advertisement</p>
-        <p style="color: #94A3B8; font-size: 14px;">Loading Monetag Ad...</p>
-        <div style="background: #4F46E5; color: white; padding: 15px 30px; border-radius: 12px; font-size: 16px; font-weight: 600;">Your Ad Here - Monetag</div>
+        <p style="color: white; font-size: 18px; font-weight: 600; margin-top: 15px;">📢 Monetag Ad</p>
       </div>
-      <div class="ad-reward-notice" id="ad-reward-notice" style="display: none;">✅ Ad watched! +৳5 added</div>
+      <div class="ad-reward-notice" id="ad-reward-notice" style="display: none;">✅ +৳5 added!</div>
     </div>
   </div>
 
@@ -190,12 +188,13 @@
       </div>
       <div class="flex gap-4 items-center">
         <div class="relative cursor-pointer" onclick="navigateTo('notifications')"><i class="fas fa-bell text-2xl text-slate-300"></i><span class="notification-dot"></span></div>
-        <img id="profile-pic-header" src="https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner" alt="Profile" class="w-12 h-12 rounded-full border-3 border-cyan-400 cursor-pointer" onclick="navigateTo('profile')" loading="lazy">
+        <img id="profile-pic-header" src="https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner" alt="Profile" class="w-12 h-12 rounded-full border-3 border-cyan-400 cursor-pointer" onclick="navigateTo('profile')">
       </div>
     </header>
 
     <main class="main-content">
       
+      <!-- Dashboard Screen -->
       <div id="dashboard-screen" class="screen active">
         <div class="glass-card p-6 mb-4 animate-float cursor-pointer" onclick="navigateTo('wallet')">
           <div class="flex justify-between items-start mb-5">
@@ -233,6 +232,7 @@
         <div class="glass-card p-5 mb-4"><h3 class="text-card-title mb-4">🕒 Recent Activities</h3><div class="space-y-4" id="recent-activities"><p class="text-slate-400 text-sm">No activities yet</p></div></div>
       </div>
 
+      <!-- Tasks Screen -->
       <div id="tasks-screen" class="screen">
         <h2 class="text-2xl font-bold mb-5 flex items-center gap-3"><i class="fas fa-tasks text-cyan-400"></i> Daily Tasks</h2>
         <div class="space-y-4 mb-6" id="tasks-container"><p class="text-slate-400 text-center py-8">Loading tasks...</p></div>
@@ -240,6 +240,7 @@
         <div class="space-y-4" id="offerwall-container"><p class="text-slate-400 text-center py-8">Loading offers...</p></div>
       </div>
 
+      <!-- Wallet Screen -->
       <div id="wallet-screen" class="screen">
         <div class="glass-card p-8 text-center mb-5">
           <div class="w-24 h-24 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-5"><i class="fas fa-wallet icon-xl text-white"></i></div>
@@ -251,6 +252,7 @@
         <div class="glass-card p-5"><h3 class="text-card-title mb-4">📋 Transaction History</h3><div class="space-y-4 text-base" id="transaction-history"><p class="text-slate-400 text-sm">No transactions yet</p></div></div>
       </div>
 
+      <!-- Withdraw Screen -->
       <div id="withdraw-screen" class="screen">
         <h2 class="text-2xl font-bold mb-5 flex items-center gap-3"><i class="fas fa-paper-plane text-cyan-400"></i> Withdraw Funds</h2>
         <div class="glass-card p-6 space-y-5">
@@ -266,6 +268,7 @@
         </div>
       </div>
 
+      <!-- Referral Screen -->
       <div id="referral-screen" class="screen">
         <h2 class="text-2xl font-bold mb-5 flex items-center gap-3"><i class="fas fa-users text-purple-400"></i> Referral Program</h2>
         <div class="glass-card p-6 text-center mb-5">
@@ -277,8 +280,10 @@
         <div class="glass-card p-5"><h3 class="text-card-title mb-4">📈 Multi-Level Stats</h3><div class="space-y-4 text-base"><div class="flex justify-between font-semibold"><span>Level 1 (Direct)</span><span>0 refs • ৳0</span></div><div class="flex justify-between font-semibold"><span>Level 2</span><span>0 refs • ৳0</span></div></div></div>
       </div>
 
+      <!-- Notifications Screen -->
       <div id="notifications-screen" class="screen"><h2 class="text-2xl font-bold mb-5"><i class="fas fa-bell text-yellow-400"></i> Notifications</h2><div class="glass-card p-5"><p class="text-center text-slate-400">No new notifications</p></div></div>
 
+      <!-- Profile Screen -->
       <div id="profile-screen" class="screen">
         <div class="glass-card p-7 text-center mb-5">
           <img id="profile-pic-large" src="https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner" alt="Profile" class="w-28 h-28 rounded-full border-4 border-cyan-400 mx-auto">
@@ -305,8 +310,9 @@
     </nav>
   </div>
 
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  
   <script>
-    // ============ FIREBASE CONFIG ============
     const firebaseConfig = {
       apiKey: "AIzaSyB8leAjKEjUJAtF5TE43EO-HduxwpCSxIU",
       authDomain: "infinity-earn-286dc.firebaseapp.com",
@@ -320,7 +326,7 @@
     const db = firebase.database();
 
     const WHATSAPP = 'https://whatsapp.com/channel/0029Vb7oPaMD38CSWMMhJu13';
-    const BOT_USERNAME = 'FASTEARNERTOP_BOT'; // Bot username for referral link
+    const BOT_USERNAME = 'FASTEARNERTOP_BOT';
     
     const State = {
       userId: null, balance: 0, todayEarnings: 0, totalEarned: 0, referralEarnings: 0, totalRefs: 0, activeRefs: 0,
@@ -329,13 +335,16 @@
       settings: { perAdReward: 5, minWithdraw: 840, maxWithdraw: 42000, requiredRefs: 0 }
     };
 
-    // ============ REFERRAL LINK GENERATOR ============
-    function getReferralLink() {
-      // Uses Telegram bot deep linking: https://t.me/BOT_USERNAME?start=REFERRAL_CODE
-      return `https://t.me/${BOT_USERNAME}?start=${State.referralCode}`;
+    function getTelegramUser() {
+      if (window.Telegram?.WebApp?.initDataUnsafe?.user) {
+        const u = window.Telegram.WebApp.initDataUnsafe.user;
+        return { id: u.id, firstName: u.first_name || '', lastName: u.last_name || '', username: u.username || '', photoUrl: u.photo_url || '' };
+      }
+      return null;
     }
 
-    // ============ LOAD SETTINGS ============
+    function getReferralLink() { return `https://t.me/${BOT_USERNAME}?start=${State.referralCode}`; }
+
     function loadSettings() {
       db.ref('admin_settings').on('value', snap => {
         if (snap.val()) {
@@ -347,7 +356,6 @@
       });
     }
 
-    // ============ LOAD ANNOUNCEMENTS ============
     function loadAnnouncements() {
       db.ref('announcements').on('value', snap => {
         const data = snap.val();
@@ -358,25 +366,16 @@
       });
     }
 
-    // ============ LOAD TASKS ============
     function loadTasks() {
       db.ref('tasks').on('value', snap => {
         const tasks = snap.val();
         const tc = document.getElementById('tasks-container');
         const oc = document.getElementById('offerwall-container');
-        
         if (!tasks) { tc.innerHTML = '<p class="text-slate-400 text-center py-8">No tasks</p>'; oc.innerHTML = '<p class="text-slate-400 text-center py-8">No offers</p>'; return; }
-        
         const dTasks = Object.entries(tasks).filter(([_,t]) => t.type === 'daily');
         const oTasks = Object.entries(tasks).filter(([_,t]) => t.type === 'offerwall');
-        
-        tc.innerHTML = dTasks.length ? dTasks.map(([id,t]) => `
-          <div class="glass-card p-5"><div class="flex justify-between items-start mb-3"><div class="flex items-start gap-4"><div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center"><i class="fas ${t.icon||'fa-tasks'} text-purple-400 text-xl"></i></div><div><p class="text-task-title">${t.title}</p><p class="text-sm text-slate-400 mt-1">Reward: ৳${t.reward}</p></div></div></div><button onclick="doTask('${id}',${t.reward},'${t.title}')" class="gradient-btn w-full btn-md rounded-2xl">Complete & Earn ৳${t.reward}</button></div>
-        `).join('') : '<p class="text-slate-400 text-center py-8">No tasks</p>';
-        
-        oc.innerHTML = oTasks.length ? oTasks.map(([id,t]) => `
-          <div class="glass-card p-5 flex items-center gap-4"><div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center text-2xl">🎯</div><div class="flex-1"><p class="text-task-title">${t.title}</p><div class="flex gap-4 text-sm text-slate-400 mt-2"><span class="font-semibold"><i class="fas fa-coins text-yellow-400"></i> ৳${t.reward}</span></div></div><button onclick="doTask('${id}',${t.reward},'${t.title}')" class="gradient-btn px-6 py-3 rounded-2xl text-base font-bold">Start</button></div>
-        `).join('') : '<p class="text-slate-400 text-center py-8">No offers</p>';
+        tc.innerHTML = dTasks.length ? dTasks.map(([id,t]) => `<div class="glass-card p-5"><div class="flex justify-between items-start mb-3"><div class="flex items-start gap-4"><div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center"><i class="fas ${t.icon||'fa-tasks'} text-purple-400 text-xl"></i></div><div><p class="text-task-title">${t.title}</p><p class="text-sm text-slate-400 mt-1">Reward: ৳${t.reward}</p></div></div></div><button onclick="doTask('${id}',${t.reward},'${t.title}')" class="gradient-btn w-full btn-md rounded-2xl">Complete & Earn ৳${t.reward}</button></div>`).join('') : '<p class="text-slate-400 text-center py-8">No tasks</p>';
+        oc.innerHTML = oTasks.length ? oTasks.map(([id,t]) => `<div class="glass-card p-5 flex items-center gap-4"><div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center text-2xl">🎯</div><div class="flex-1"><p class="text-task-title">${t.title}</p><div class="flex gap-4 text-sm text-slate-400 mt-2"><span class="font-semibold"><i class="fas fa-coins text-yellow-400"></i> ৳${t.reward}</span></div></div><button onclick="doTask('${id}',${t.reward},'${t.title}')" class="gradient-btn px-6 py-3 rounded-2xl text-base font-bold">Start</button></div>`).join('') : '<p class="text-slate-400 text-center py-8">No offers</p>';
       });
     }
 
@@ -397,18 +396,13 @@
     }
 
     function updateProfileUI() {
-      // FIXED: Properly update name, username and profile pic from Telegram
-      const fullName = (State.user.firstName + ' ' + State.user.lastName).trim() || 'User';
-      document.getElementById('profile-name').textContent = fullName;
+      const fullName = (State.user.firstName + ' ' + State.user.lastName).trim();
+      document.getElementById('profile-name').textContent = fullName || 'User';
       document.getElementById('profile-username').textContent = '@' + (State.user.username || 'user');
       document.getElementById('profile-id').textContent = State.userId || '---';
-      
-      // Update profile pics - both header and profile screen
       const photoUrl = State.user.photoUrl || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + (State.userId || 'default');
       document.getElementById('profile-pic-header').src = photoUrl;
       document.getElementById('profile-pic-large').src = photoUrl;
-      
-      // Update referral link
       document.getElementById('referral-link').textContent = getReferralLink();
       document.getElementById('total-refs').textContent = State.totalRefs;
       document.getElementById('active-refs').textContent = State.activeRefs;
@@ -422,10 +416,11 @@
           State.balance=d.balance||0; State.todayEarnings=d.todayEarnings||0; State.totalEarned=d.totalEarned||0;
           State.referralEarnings=d.referralEarnings||0; State.totalRefs=d.totalRefs||0; State.activeRefs=d.activeRefs||0;
           State.referralCode=d.referralCode||State.referralCode; State.isDarkMode=d.theme!=='light';
-          State.user.firstName=d.firstName||''; State.user.lastName=d.lastName||'';
-          State.user.username=d.username||''; State.user.photoUrl=d.photoUrl||'';
-          updateBalanceUI();
-          updateProfileUI();
+          if (!State.user.firstName) State.user.firstName = d.firstName || '';
+          if (!State.user.lastName) State.user.lastName = d.lastName || '';
+          if (!State.user.username) State.user.username = d.username || '';
+          if (!State.user.photoUrl) State.user.photoUrl = d.photoUrl || '';
+          updateBalanceUI(); updateProfileUI();
           document.getElementById('main-body').classList.toggle('light-mode',!State.isDarkMode);
           document.getElementById('loading-overlay').style.display='none';
         }
@@ -450,43 +445,25 @@
     }
 
     function initAuth() {
-      return new Promise(resolve => {
-        // FIXED: Properly get Telegram user data
-        try {
-          if(window.Telegram?.WebApp?.initDataUnsafe?.user) {
-            const tg = window.Telegram.WebApp.initDataUnsafe.user;
-            State.userId = 'tg_' + tg.id;
-            State.user.firstName = tg.first_name || '';
-            State.user.lastName = tg.last_name || '';
-            State.user.username = tg.username || ('user' + tg.id);
-            State.user.photoUrl = tg.photo_url || ('https://api.dicebear.com/7.x/avataaars/svg?seed=' + tg.id);
-            State.referralCode = 'ref' + tg.id;
-            window.Telegram.WebApp.ready();
-            window.Telegram.WebApp.expand();
-            console.log('✅ Telegram user loaded:', State.user);
-          } else {
-            // Dev mode fallback
-            State.userId = 'tg_123456789';
-            State.user.firstName = 'John';
-            State.user.lastName = 'Doe';
-            State.user.username = 'fastuser';
-            State.user.photoUrl = 'https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner';
-            State.referralCode = 'ref123456';
-          }
-        } catch(e) {
-          State.userId = 'tg_123456789';
-          State.referralCode = 'ref123456';
-        }
-        
-        // Update UI immediately with what we have
-        updateProfileUI();
-        updateBalanceUI();
-        
-        db.ref('users/'+State.userId).once('value').then(s => {
-          if(!s.exists()) createUser(State.userId).then(()=>{loadUser(State.userId);resolve();});
-          else { loadUser(State.userId); resolve(); }
-        }).catch(()=>{document.getElementById('loading-overlay').style.display='none';resolve();});
-      });
+      const tgUser = getTelegramUser();
+      if (tgUser) {
+        State.userId = 'tg_' + tgUser.id;
+        State.user.firstName = tgUser.firstName; State.user.lastName = tgUser.lastName;
+        State.user.username = tgUser.username || ('user' + tgUser.id);
+        State.user.photoUrl = tgUser.photoUrl || ('https://api.dicebear.com/7.x/avataaars/svg?seed=' + tgUser.id);
+        State.referralCode = 'ref' + tgUser.id;
+      } else {
+        State.userId = 'tg_123456789';
+        State.user.firstName = 'John'; State.user.lastName = 'Doe';
+        State.user.username = 'fastuser'; State.user.photoUrl = 'https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner';
+        State.referralCode = 'ref123456';
+      }
+      updateProfileUI(); updateBalanceUI();
+      if (window.Telegram?.WebApp) { window.Telegram.WebApp.ready(); window.Telegram.WebApp.expand(); }
+      db.ref('users/'+State.userId).once('value').then(s => {
+        if(!s.exists()) createUser(State.userId).then(()=>loadUser(State.userId));
+        else loadUser(State.userId);
+      }).catch(()=>document.getElementById('loading-overlay').style.display='none');
     }
 
     const screens = { dashboard:'dashboard-screen',tasks:'tasks-screen',wallet:'wallet-screen',withdraw:'withdraw-screen',referral:'referral-screen',notifications:'notifications-screen',profile:'profile-screen' };
@@ -512,7 +489,7 @@
     function closeMonetagAd() { document.getElementById('monetag-ad-container').classList.remove('active'); if(adTimer)clearInterval(adTimer); }
 
     function handleSupportClick() { window.open(WHATSAPP,'_blank'); }
-    function handleWithdrawMethod(m) { State.selectedMethod=m; document.querySelectorAll('.method-btn').forEach(b=>{b.classList.remove('bg-cyan-500/20','border-cyan-500/30');b.classList.add('bg-slate-700/50','border-slate-600/30');}); const s=document.querySelector('.method-btn[onclick*="'+m+'"]'); if(s){s.classList.remove('bg-slate-700/50','border-slate-600/30');s.classList.add('bg-cyan-500/20','border-cyan-500/30');} }
+    function handleWithdrawMethod(m) { State.selectedMethod=m; document.querySelectorAll('.method-btn').forEach(b=>{b.classList.remove('bg-cyan-500/20','border-cyan-500/30');b.classList.add('bg-slate-700/50','border-slate-600/30');}); const s=document.querySelector(`.method-btn[onclick*="${m}"]`); if(s){s.classList.remove('bg-slate-700/50','border-slate-600/30');s.classList.add('bg-cyan-500/20','border-cyan-500/30');} }
     function handleWithdrawSubmit() {
       const a=document.getElementById('account-number')?.value, amt=parseFloat(document.getElementById('withdraw-amount')?.value);
       if(!State.selectedMethod)return alert('❌ Select method!'); if(!a)return alert('❌ Enter account!');
@@ -524,26 +501,16 @@
       document.getElementById('account-number').value='';document.getElementById('withdraw-amount').value='';State.selectedMethod=null;
       document.querySelectorAll('.method-btn').forEach(b=>{b.classList.remove('bg-cyan-500/20','border-cyan-500/30');b.classList.add('bg-slate-700/50','border-slate-600/30');});setTimeout(()=>navigateTo('wallet'),2000);
     }
-    
-    // FIXED: Copy referral link with bot username
-    function copyReferralLink() { 
-      const link = getReferralLink();
-      navigator.clipboard?.writeText(link).then(()=>alert('✅ Link copied!\n\n' + link)); 
-    }
-    function handleShareReferral() { 
-      const l = getReferralLink();
-      if(navigator.share) navigator.share({title:'⚡ FAST EARNER',text:'Join FAST EARNER and earn money!\n\n' + l,url:l}).catch(()=>{}); 
-      else prompt('Share this link:',l); 
-    }
-    function handleQRCode() { alert('📱 QR Code for: ' + getReferralLink()); }
+    function copyReferralLink() { const l=getReferralLink(); navigator.clipboard?.writeText(l).then(()=>alert('✅ Copied!\n'+l)); }
+    function handleShareReferral() { const l=getReferralLink(); if(navigator.share)navigator.share({title:'⚡ FAST EARNER',text:'Earn BDT! '+l,url:l}).catch(()=>{}); else prompt('Share:',l); }
+    function handleQRCode() { alert('📱 QR Code for: '+getReferralLink()); }
     function handleSettingsClick(s) { alert({notifications:'🔔 ON',privacy:'🔒 Secured',language:'🌐 English'}[s]||'Settings'); }
     function toggleTheme() { State.isDarkMode=!State.isDarkMode; document.getElementById('main-body').classList.toggle('light-mode',!State.isDarkMode); const b=document.getElementById('theme-toggle-btn'); b.innerHTML=State.isDarkMode?'<span><i class="fas fa-moon mr-3 text-lg"></i> Dark Mode</span><i class="fas fa-chevron-right text-slate-400 text-lg"></i>':'<span><i class="fas fa-sun mr-3 text-lg"></i> Light Mode</span><i class="fas fa-chevron-right text-slate-400 text-lg"></i>'; db.ref('users/'+State.userId).update({theme:State.isDarkMode?'dark':'light'}); }
 
-    async function init() {
+    function init() {
       preload(); loadSettings(); loadAnnouncements(); loadTasks();
-      setTimeout(()=>document.getElementById('loading-overlay').style.display='none',10000);
-      await initAuth(); navigateTo('dashboard');
-      console.log('⚡ FAST EARNER - Bot Referral Link Updated | Profile Fixed');
+      setTimeout(()=>document.getElementById('loading-overlay').style.display='none',8000);
+      initAuth(); navigateTo('dashboard');
     }
     document.addEventListener('DOMContentLoaded',init);
     window.navigateTo=navigateTo;window.toggleTheme=toggleTheme;window.copyReferralLink=copyReferralLink;window.doTask=doTask;window.handleWithdrawMethod=handleWithdrawMethod;window.handleWithdrawSubmit=handleWithdrawSubmit;window.handleShareReferral=handleShareReferral;window.handleQRCode=handleQRCode;window.handleSettingsClick=handleSettingsClick;window.handleSupportClick=handleSupportClick;window.openMonetagAd=openMonetagAd;window.closeMonetagAd=closeMonetagAd;
