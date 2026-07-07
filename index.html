@@ -280,7 +280,12 @@
       <div id="notifications-screen" class="screen"><h2 class="text-2xl font-bold mb-5"><i class="fas fa-bell text-yellow-400"></i> Notifications</h2><div class="glass-card p-5"><p class="text-center text-slate-400">No new notifications</p></div></div>
 
       <div id="profile-screen" class="screen">
-        <div class="glass-card p-7 text-center mb-5"><img src="https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner" alt="Profile" class="w-28 h-28 rounded-full border-4 border-cyan-400 mx-auto"><h2 class="text-2xl font-bold mt-4" id="profile-name">John Doe</h2><p class="text-base text-slate-400 mt-1">@fastuser</p><p class="text-sm text-slate-500 mt-2">ID: 123456789</p></div>
+        <div class="glass-card p-7 text-center mb-5">
+          <img id="profile-pic-large" src="https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner" alt="Profile" class="w-28 h-28 rounded-full border-4 border-cyan-400 mx-auto">
+          <h2 class="text-2xl font-bold mt-4" id="profile-name">User</h2>
+          <p class="text-base text-slate-400 mt-1" id="profile-username">@user</p>
+          <p class="text-sm text-slate-500 mt-2">ID: <span id="profile-id">---</span></p>
+        </div>
         <div class="glass-card p-5 space-y-4"><h3 class="text-card-title mb-3">⚙️ Settings</h3>
           <button id="theme-toggle-btn" onclick="toggleTheme()" class="w-full flex items-center justify-between p-4 bg-slate-700/50 rounded-2xl text-base font-semibold"><span><i class="fas fa-moon mr-3 text-lg"></i> Dark Mode</span><i class="fas fa-chevron-right text-slate-400 text-lg"></i></button>
           <button onclick="handleSettingsClick('notifications')" class="w-full flex items-center justify-between p-4 bg-slate-700/50 rounded-2xl text-base font-semibold"><span><i class="fas fa-bell mr-3 text-lg"></i> Notifications</span><i class="fas fa-chevron-right text-slate-400 text-lg"></i></button>
@@ -301,6 +306,7 @@
   </div>
 
   <script>
+    // ============ FIREBASE CONFIG ============
     const firebaseConfig = {
       apiKey: "AIzaSyB8leAjKEjUJAtF5TE43EO-HduxwpCSxIU",
       authDomain: "infinity-earn-286dc.firebaseapp.com",
@@ -312,16 +318,24 @@
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
+
     const WHATSAPP = 'https://whatsapp.com/channel/0029Vb7oPaMD38CSWMMhJu13';
+    const BOT_USERNAME = 'FASTEARNERTOP_BOT'; // Bot username for referral link
     
     const State = {
       userId: null, balance: 0, todayEarnings: 0, totalEarned: 0, referralEarnings: 0, totalRefs: 0, activeRefs: 0,
-      referralCode: 'ref123456', isDarkMode: true, selectedMethod: null,
-      user: { firstName: 'John', lastName: 'Doe', username: 'fastuser', photoUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner' },
+      referralCode: '', isDarkMode: true, selectedMethod: null,
+      user: { firstName: '', lastName: '', username: '', photoUrl: '' },
       settings: { perAdReward: 5, minWithdraw: 840, maxWithdraw: 42000, requiredRefs: 0 }
     };
 
-    // ============ LOAD SETTINGS FROM FIREBASE ============
+    // ============ REFERRAL LINK GENERATOR ============
+    function getReferralLink() {
+      // Uses Telegram bot deep linking: https://t.me/BOT_USERNAME?start=REFERRAL_CODE
+      return `https://t.me/${BOT_USERNAME}?start=${State.referralCode}`;
+    }
+
+    // ============ LOAD SETTINGS ============
     function loadSettings() {
       db.ref('admin_settings').on('value', snap => {
         if (snap.val()) {
@@ -382,6 +396,25 @@
       document.getElementById('referral-earnings').textContent = '৳'+State.referralEarnings.toLocaleString();
     }
 
+    function updateProfileUI() {
+      // FIXED: Properly update name, username and profile pic from Telegram
+      const fullName = (State.user.firstName + ' ' + State.user.lastName).trim() || 'User';
+      document.getElementById('profile-name').textContent = fullName;
+      document.getElementById('profile-username').textContent = '@' + (State.user.username || 'user');
+      document.getElementById('profile-id').textContent = State.userId || '---';
+      
+      // Update profile pics - both header and profile screen
+      const photoUrl = State.user.photoUrl || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + (State.userId || 'default');
+      document.getElementById('profile-pic-header').src = photoUrl;
+      document.getElementById('profile-pic-large').src = photoUrl;
+      
+      // Update referral link
+      document.getElementById('referral-link').textContent = getReferralLink();
+      document.getElementById('total-refs').textContent = State.totalRefs;
+      document.getElementById('active-refs').textContent = State.activeRefs;
+      document.getElementById('ref-earned').textContent = State.referralEarnings.toLocaleString();
+    }
+
     function loadUser(userId) {
       db.ref('users/'+userId).on('value', snap => {
         const d = snap.val();
@@ -389,16 +422,10 @@
           State.balance=d.balance||0; State.todayEarnings=d.todayEarnings||0; State.totalEarned=d.totalEarned||0;
           State.referralEarnings=d.referralEarnings||0; State.totalRefs=d.totalRefs||0; State.activeRefs=d.activeRefs||0;
           State.referralCode=d.referralCode||State.referralCode; State.isDarkMode=d.theme!=='light';
-          State.user.firstName=d.firstName||'John'; State.user.lastName=d.lastName||'Doe';
-          State.user.username=d.username||'fastuser'; State.user.photoUrl=d.photoUrl||State.user.photoUrl;
+          State.user.firstName=d.firstName||''; State.user.lastName=d.lastName||'';
+          State.user.username=d.username||''; State.user.photoUrl=d.photoUrl||'';
           updateBalanceUI();
-          document.getElementById('profile-name').textContent=(State.user.firstName+' '+State.user.lastName).trim();
-          document.getElementById('profile-username').textContent='@'+State.user.username;
-          document.getElementById('profile-pic-header').src=State.user.photoUrl;
-          document.getElementById('referral-link').textContent='https://t.me/FastEarnerBot?start='+State.referralCode;
-          document.getElementById('total-refs').textContent=State.totalRefs;
-          document.getElementById('active-refs').textContent=State.activeRefs;
-          document.getElementById('ref-earned').textContent=State.referralEarnings.toLocaleString();
+          updateProfileUI();
           document.getElementById('main-body').classList.toggle('light-mode',!State.isDarkMode);
           document.getElementById('loading-overlay').style.display='none';
         }
@@ -424,14 +451,37 @@
 
     function initAuth() {
       return new Promise(resolve => {
+        // FIXED: Properly get Telegram user data
         try {
           if(window.Telegram?.WebApp?.initDataUnsafe?.user) {
-            const tg=window.Telegram.WebApp.initDataUnsafe.user;
-            State.userId='tg_'+tg.id; State.user.firstName=tg.first_name||'John'; State.user.lastName=tg.last_name||'Doe';
-            State.user.username=tg.username||'fastuser'; State.user.photoUrl=tg.photo_url||State.user.photoUrl;
-            State.referralCode='ref'+tg.id; window.Telegram.WebApp.ready(); window.Telegram.WebApp.expand();
-          } else { State.userId='tg_123456789'; }
-        } catch(e) { State.userId='tg_123456789'; }
+            const tg = window.Telegram.WebApp.initDataUnsafe.user;
+            State.userId = 'tg_' + tg.id;
+            State.user.firstName = tg.first_name || '';
+            State.user.lastName = tg.last_name || '';
+            State.user.username = tg.username || ('user' + tg.id);
+            State.user.photoUrl = tg.photo_url || ('https://api.dicebear.com/7.x/avataaars/svg?seed=' + tg.id);
+            State.referralCode = 'ref' + tg.id;
+            window.Telegram.WebApp.ready();
+            window.Telegram.WebApp.expand();
+            console.log('✅ Telegram user loaded:', State.user);
+          } else {
+            // Dev mode fallback
+            State.userId = 'tg_123456789';
+            State.user.firstName = 'John';
+            State.user.lastName = 'Doe';
+            State.user.username = 'fastuser';
+            State.user.photoUrl = 'https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner';
+            State.referralCode = 'ref123456';
+          }
+        } catch(e) {
+          State.userId = 'tg_123456789';
+          State.referralCode = 'ref123456';
+        }
+        
+        // Update UI immediately with what we have
+        updateProfileUI();
+        updateBalanceUI();
+        
         db.ref('users/'+State.userId).once('value').then(s => {
           if(!s.exists()) createUser(State.userId).then(()=>{loadUser(State.userId);resolve();});
           else { loadUser(State.userId); resolve(); }
@@ -474,9 +524,18 @@
       document.getElementById('account-number').value='';document.getElementById('withdraw-amount').value='';State.selectedMethod=null;
       document.querySelectorAll('.method-btn').forEach(b=>{b.classList.remove('bg-cyan-500/20','border-cyan-500/30');b.classList.add('bg-slate-700/50','border-slate-600/30');});setTimeout(()=>navigateTo('wallet'),2000);
     }
-    function copyReferralLink() { navigator.clipboard?.writeText('https://t.me/FastEarnerBot?start='+State.referralCode).then(()=>alert('✅ Copied!')); }
-    function handleShareReferral() { const l='https://t.me/FastEarnerBot?start='+State.referralCode; if(navigator.share)navigator.share({title:'⚡ FAST EARNER',text:'Earn BDT! '+l,url:l}).catch(()=>{}); else prompt('Share:',l); }
-    function handleQRCode() { alert('📱 QR Code'); }
+    
+    // FIXED: Copy referral link with bot username
+    function copyReferralLink() { 
+      const link = getReferralLink();
+      navigator.clipboard?.writeText(link).then(()=>alert('✅ Link copied!\n\n' + link)); 
+    }
+    function handleShareReferral() { 
+      const l = getReferralLink();
+      if(navigator.share) navigator.share({title:'⚡ FAST EARNER',text:'Join FAST EARNER and earn money!\n\n' + l,url:l}).catch(()=>{}); 
+      else prompt('Share this link:',l); 
+    }
+    function handleQRCode() { alert('📱 QR Code for: ' + getReferralLink()); }
     function handleSettingsClick(s) { alert({notifications:'🔔 ON',privacy:'🔒 Secured',language:'🌐 English'}[s]||'Settings'); }
     function toggleTheme() { State.isDarkMode=!State.isDarkMode; document.getElementById('main-body').classList.toggle('light-mode',!State.isDarkMode); const b=document.getElementById('theme-toggle-btn'); b.innerHTML=State.isDarkMode?'<span><i class="fas fa-moon mr-3 text-lg"></i> Dark Mode</span><i class="fas fa-chevron-right text-slate-400 text-lg"></i>':'<span><i class="fas fa-sun mr-3 text-lg"></i> Light Mode</span><i class="fas fa-chevron-right text-slate-400 text-lg"></i>'; db.ref('users/'+State.userId).update({theme:State.isDarkMode?'dark':'light'}); }
 
@@ -484,6 +543,7 @@
       preload(); loadSettings(); loadAnnouncements(); loadTasks();
       setTimeout(()=>document.getElementById('loading-overlay').style.display='none',10000);
       await initAuth(); navigateTo('dashboard');
+      console.log('⚡ FAST EARNER - Bot Referral Link Updated | Profile Fixed');
     }
     document.addEventListener('DOMContentLoaded',init);
     window.navigateTo=navigateTo;window.toggleTheme=toggleTheme;window.copyReferralLink=copyReferralLink;window.doTask=doTask;window.handleWithdrawMethod=handleWithdrawMethod;window.handleWithdrawSubmit=handleWithdrawSubmit;window.handleShareReferral=handleShareReferral;window.handleQRCode=handleQRCode;window.handleSettingsClick=handleSettingsClick;window.handleSupportClick=handleSupportClick;window.openMonetagAd=openMonetagAd;window.closeMonetagAd=closeMonetagAd;
