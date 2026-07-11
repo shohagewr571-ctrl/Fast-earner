@@ -172,11 +172,21 @@
     #channel-join-overlay.active { display: flex; }
     .channel-card { background: rgba(30,41,59,0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 20px; text-align: center; max-width: 400px; width: 100%; margin-bottom: 10px; }
     .channel-card.joined { opacity: 0.5; border-color: rgba(34,197,94,0.5); }
+    .toast {
+      position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%);
+      padding: 12px 24px; border-radius: 12px; font-weight: 600; z-index: 99999;
+      display: none; max-width: 90%; text-align: center;
+    }
+    .toast-success { background: #22C55E; color: white; }
+    .toast-error { background: #EF4444; color: white; }
   </style>
 </head>
 <body id="main-body">
 
   <div id="loading-overlay" class="loading-overlay"><div class="loading-spinner"></div><p style="color:white;font-size:18px;font-weight:600;">Loading...</p></div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
 
   <div id="channel-join-overlay">
     <div style="text-align:center;margin-bottom:20px"><i class="fas fa-telegram text-5xl text-cyan-400 mb-3"></i><h2 style="font-size:24px;font-weight:800">📢 Join Our Channels</h2><p style="color:#94A3B8;font-size:14px;margin-top:8px">Please join all channels to continue</p></div>
@@ -321,7 +331,14 @@
     
     const State={userId:null,balance:0,todayEarnings:0,totalEarned:0,referralEarnings:0,totalRefs:0,activeRefs:0,referralCode:'',isDarkMode:true,selectedMethod:null,user:{firstName:'',lastName:'',username:'',photoUrl:''},settings:{perAdReward:5,minWithdraw:840,maxWithdraw:42000,requiredRefs:0,dailyAdsLimit:20,processingTime:48,withdrawMethods:['bkash','nagad','rocket','usdt'],pointToBdt:0.012,requiredChannels:[],channelCheckEnabled:true},completedTasks:{},dailyAdsWatched:0,createdAt:'',joinedChannels:{}};
 
-    function showToast(msg,type='success'){const t=document.getElementById('toast');if(!t){alert(msg);return}t.textContent=msg;t.className='toast toast-'+type;t.style.display='block';setTimeout(()=>t.style.display='none',3000)}
+    function showToast(msg,type='success'){
+      const t=document.getElementById('toast');
+      if(!t){alert(msg);return}
+      t.textContent=msg;
+      t.className='toast toast-'+type;
+      t.style.display='block';
+      setTimeout(()=>t.style.display='none',3000)
+    }
     function updateNotifBadge(c){const b=document.getElementById('notif-badge');if(!b)return;if(c>0){b.textContent=c>99?'99+':c;b.classList.add('show')}else{b.classList.remove('show');b.textContent='0'}}
     
     function loadChannelSettings(){db.ref('admin_settings/requiredChannels').on('value',snap=>{State.settings.requiredChannels=snap.val()||[];db.ref('admin_settings/channelCheckEnabled').on('value',s=>{State.settings.channelCheckEnabled=s.val()!==false;if(State.settings.channelCheckEnabled&&State.settings.requiredChannels.length>0)checkChannelsOnStart()})})}
@@ -337,8 +354,54 @@
     function updatePointConversion(){const p=parseFloat(document.getElementById('withdraw-amount')?.value)||0;document.getElementById('conversion-result').textContent='You will get: ৳'+(p*(State.settings.pointToBdt||0.012)).toFixed(2)}
 
     let adTimer=null,adSec=14;
-    function openMonetagAd(){document.getElementById('monetag-ad-container').classList.add('active');adSec=14;document.getElementById('timer-seconds').textContent=adSec;if(typeof window.show_11254306==='function')window.show_11254306();if(adTimer)clearInterval(adTimer);adTimer=setInterval(()=>{adSec--;document.getElementById('timer-seconds').textContent=adSec;if(adSec<=0){clearInterval(adTimer);payReward()}},1000)}
-    function payReward(){const r=State.settings.perAdReward;State.balance+=r;State.todayEarnings+=r;State.totalEarned+=r;State.dailyAdsWatched++;updateBalanceUI();updateAdsLimitUI();db.ref('users/'+State.userId).update({balance:State.balance,todayEarnings:State.todayEarnings,totalEarned:State.totalEarned,dailyAdsWatched:State.dailyAdsWatched});document.getElementById('ad-timer').style.display='none';document.getElementById('ad-reward-notice').style.display='block';setTimeout(()=>{document.getElementById('monetag-ad-container').classList.remove('active')},3000)}
+    
+    // FIXED: openMonetagAd function with proper daily limit check
+    function openMonetagAd(){
+        // Check if daily limit reached
+        const dailyLimit = State.settings.dailyAdsLimit || 20;
+        const watched = State.dailyAdsWatched || 0;
+        
+        if (watched >= dailyLimit) {
+            showToast('⚠️ You have reached daily ad limit! Come back tomorrow.', 'error');
+            return;
+        }
+        
+        document.getElementById('monetag-ad-container').classList.add('active');
+        adSec = 14;
+        document.getElementById('timer-seconds').textContent = adSec;
+        if (typeof window.show_11254306 === 'function') window.show_11254306();
+        if (adTimer) clearInterval(adTimer);
+        adTimer = setInterval(() => {
+            adSec--;
+            document.getElementById('timer-seconds').textContent = adSec;
+            if (adSec <= 0) {
+                clearInterval(adTimer);
+                payReward();
+            }
+        }, 1000);
+    }
+
+    // FIXED: payReward function
+    function payReward() {
+        const r = State.settings.perAdReward;
+        State.balance += r;
+        State.todayEarnings += r;
+        State.totalEarned += r;
+        State.dailyAdsWatched++;
+        updateBalanceUI();
+        updateAdsLimitUI();
+        db.ref('users/' + State.userId).update({
+            balance: State.balance,
+            todayEarnings: State.todayEarnings,
+            totalEarned: State.totalEarned,
+            dailyAdsWatched: State.dailyAdsWatched
+        });
+        document.getElementById('ad-timer').style.display = 'none';
+        document.getElementById('ad-reward-notice').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('monetag-ad-container').classList.remove('active');
+        }, 3000);
+    }
 
     function loadSettings(){
       db.ref('admin_settings').on('value',snap=>{
@@ -415,7 +478,6 @@
       document.getElementById('level2-stats').textContent='0 refs • 0';
     }
 
-    // ============ FIXED: Tasks with Link ============
     function loadTasks(){
       db.ref('tasks').on('value',snap=>{
         const t=snap.val();const tc=document.getElementById('tasks-container');const oc=document.getElementById('offerwall-container');
@@ -426,7 +488,6 @@
       });
     }
 
-    // FIXED: doTask with link support - opens link then gives reward
     function doTask(id,reward,title,link){
       if(State.completedTasks[id]){alert('⚠️ Already completed!');return}
       State.completedTasks[id]=true;
@@ -436,7 +497,6 @@
       db.ref('users/'+State.userId+'/completedTasks/'+id).set(true);
       db.ref('users/'+State.userId+'/transactions').push({type:'credit',amount:reward,description:'✅ '+title,date:new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})});
       
-      // Open link if exists
       if(link && link.trim()!==''){
         window.open(link,'_blank');
         alert('✅ +'+reward+' earned! Opening link...');
