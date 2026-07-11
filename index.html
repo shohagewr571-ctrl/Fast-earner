@@ -185,9 +185,9 @@
   </div>
 
   <div id="monetag-ad-container">
-    <div class="ad-timer" id="ad-timer">⏱️ Watch <span id="timer-seconds">14</span>s to earn <span id="ad-reward-display">5</span> Points</div>
+    <div class="ad-timer" id="ad-timer">⏱️ Watch <span id="timer-seconds">14</span>s to earn <span id="ad-reward-display">5</span></div>
     <div id="monetag-ad-placeholder"><div style="text-align:center;color:#94A3B8;"><i class="fas fa-ad text-5xl mb-4" style="color:#06B6D4;"></i><p style="font-size:18px;font-weight:600;color:white;">Loading Ad...</p></div></div>
-    <div class="ad-reward-notice" id="ad-reward-notice" style="display:none;">✅ Ad watched! +<span id="ad-reward-done">5</span> Points added</div>
+    <div class="ad-reward-notice" id="ad-reward-notice" style="display:none;">✅ Ad watched! +<span id="ad-reward-done">5</span> added</div>
   </div>
 
   <div id="app-container">
@@ -205,20 +205,20 @@
       <div id="dashboard-screen" class="screen active">
         <div class="glass-card p-6 mb-4 animate-float cursor-pointer" onclick="navigateTo('wallet')">
           <div class="flex justify-between items-start mb-5">
-            <div><p class="text-slate-400 text-label uppercase tracking-wider mb-2">Available Points</p><h2 class="text-balance font-black counter">🪙 <span id="balance">0</span></h2></div>
+            <div><p class="text-slate-400 text-label uppercase tracking-wider mb-2">Available Balance</p><h2 class="text-balance font-black counter">🪙 <span id="balance">0</span></h2></div>
             <div class="bg-gradient-to-br from-indigo-500/30 to-cyan-500/30 p-4 rounded-2xl backdrop-blur-sm"><i class="fas fa-coins icon-xl text-yellow-400"></i></div>
           </div>
           <div class="stats-grid">
-            <div class="text-center bg-slate-800/50 rounded-2xl p-4"><p class="text-slate-400 text-xs font-medium mb-1">Today</p><p class="text-stat text-green-400" id="today-earnings">+0 Pts</p></div>
-            <div class="text-center bg-slate-800/50 rounded-2xl p-4"><p class="text-slate-400 text-xs font-medium mb-1">Total Earned</p><p class="text-stat" id="total-earned">0 Pts</p></div>
-            <div class="text-center bg-slate-800/50 rounded-2xl p-4"><p class="text-slate-400 text-xs font-medium mb-1">Referrals</p><p class="text-stat" id="referral-earnings">0 Pts</p></div>
+            <div class="text-center bg-slate-800/50 rounded-2xl p-4"><p class="text-slate-400 text-xs font-medium mb-1">Today</p><p class="text-stat text-green-400" id="today-earnings">+0</p></div>
+            <div class="text-center bg-slate-800/50 rounded-2xl p-4"><p class="text-slate-400 text-xs font-medium mb-1">Total Earned</p><p class="text-stat" id="total-earned">0</p></div>
+            <div class="text-center bg-slate-800/50 rounded-2xl p-4"><p class="text-slate-400 text-xs font-medium mb-1">Referrals</p><p class="text-stat" id="referral-earnings">0</p></div>
           </div>
         </div>
 
         <div class="quick-actions-grid mb-4">
           <button onclick="openMonetagAd()" class="glass-card p-5 flex flex-col items-center gap-3">
             <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center"><i class="fas fa-play-circle icon-lg text-white"></i></div>
-            <span class="font-bold text-base">Watch Ads</span><span class="text-sm text-green-400 font-semibold" id="ad-reward-text">Earn 5 Pts/Ad</span>
+            <span class="font-bold text-base">Watch Ads</span><span class="text-sm text-green-400 font-semibold" id="ad-reward-text">Earn 5/Ad</span>
           </button>
           <button onclick="handleSupportClick()" class="glass-card p-5 flex flex-col items-center gap-3">
             <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center"><i class="fas fa-headset icon-lg text-white"></i></div>
@@ -240,7 +240,7 @@
         <div class="glass-card p-5 mb-4 text-center">
           <div class="w-16 h-16 bg-gradient-to-br from-indigo-500/20 to-cyan-500/20 rounded-full flex items-center justify-center mx-auto mb-3"><i class="fas fa-calendar-check text-3xl text-cyan-400"></i></div>
           <h3 class="text-card-title mb-1">Member Since</h3>
-          <p class="text-2xl font-black text-cyan-400" id="member-since-date">Loading...</p>
+          <p class="text-2xl font-black text-cyan-400" id="member-since-date">---</p>
           <p class="text-sm text-slate-400 mt-2">You are with us for <span class="text-white font-bold" id="member-days">0</span> days! 🎉</p>
         </div>
       </div>
@@ -255,22 +255,22 @@
       <div id="wallet-screen" class="screen">
         <div class="glass-card p-8 text-center mb-5">
           <div class="w-24 h-24 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-5"><i class="fas fa-coins icon-xl text-yellow-400"></i></div>
-          <p class="text-slate-400 text-base uppercase tracking-wider font-semibold mb-2">Total Points</p>
+          <p class="text-slate-400 text-base uppercase tracking-wider font-semibold mb-2">Total Balance</p>
           <h2 class="text-5xl font-black my-3">🪙 <span id="wallet-balance">0</span></h2>
           <p class="text-sm text-slate-400 mb-5 font-medium">≈ ৳<span id="wallet-balance-bdt">0</span></p>
-          <button onclick="navigateTo('withdraw')" class="gradient-btn w-full btn-lg rounded-2xl"><i class="fas fa-paper-plane mr-3"></i> Withdraw Points</button>
+          <button onclick="navigateTo('withdraw')" class="gradient-btn w-full btn-lg rounded-2xl"><i class="fas fa-paper-plane mr-3"></i> Withdraw</button>
         </div>
         <div class="glass-card p-5"><h3 class="text-card-title mb-4">📋 Transaction History</h3><div class="space-y-4 text-base" id="transaction-history"><p class="text-slate-400 text-sm">No transactions yet</p></div></div>
       </div>
 
       <div id="withdraw-screen" class="screen">
-        <h2 class="text-2xl font-bold mb-5 flex items-center gap-3"><i class="fas fa-paper-plane text-cyan-400"></i> Withdraw Points</h2>
+        <h2 class="text-2xl font-bold mb-5 flex items-center gap-3"><i class="fas fa-paper-plane text-cyan-400"></i> Withdraw</h2>
         <div class="glass-card p-6 space-y-5">
           <div><label class="text-base font-semibold mb-3 block">Select Method</label><div class="grid grid-cols-2 gap-3" id="withdraw-methods"></div></div>
           <div><label class="text-base font-semibold mb-3 block">Account Number</label><input type="text" id="account-number" placeholder="01XXXXXXXXX" class="w-full rounded-2xl"></div>
-          <div><label class="text-base font-semibold mb-3 block">Amount (Points)</label><input type="number" id="withdraw-amount" placeholder="Min: 840 Pts | Max: 42,000 Pts" class="w-full rounded-2xl" oninput="updatePointConversion()">
-            <div class="point-conversion"><span class="text-sm text-slate-400">💱 Conversion: </span><span class="text-sm font-bold text-cyan-400" id="conversion-rate-text">1 Point = ৳0.012</span><br><span class="text-lg font-black text-yellow-400" id="conversion-result">You will get: ৳0</span></div>
-            <p class="text-sm text-slate-400 mt-2 font-medium" id="withdraw-info">Available: 🪙 <span id="available-balance">0</span> Pts • Processing: 24-48 hours</p>
+          <div><label class="text-base font-semibold mb-3 block">Amount</label><input type="number" id="withdraw-amount" placeholder="Min: 840 | Max: 42,000" class="w-full rounded-2xl" oninput="updatePointConversion()">
+            <div class="point-conversion"><span class="text-sm text-slate-400">💱 Conversion: </span><span class="text-sm font-bold text-cyan-400" id="conversion-rate-text">1 = ৳0.012</span><br><span class="text-lg font-black text-yellow-400" id="conversion-result">You will get: ৳0</span></div>
+            <p class="text-sm text-slate-400 mt-2 font-medium" id="withdraw-info">Available: 🪙 <span id="available-balance">0</span> • Processing: 24-48 hours</p>
           </div>
           <button onclick="handleWithdrawSubmit()" class="gradient-btn w-full btn-lg rounded-2xl"><i class="fas fa-check-circle mr-3"></i> Confirm Withdrawal</button>
         </div>
@@ -284,7 +284,7 @@
           <div class="flex gap-3 mt-4"><button onclick="handleShareReferral()" class="gradient-btn flex-1 btn-md rounded-2xl"><i class="fas fa-share-alt mr-2"></i> Share Link</button><button onclick="handleQRCode()" class="bg-slate-700 px-5 py-3 rounded-2xl text-base font-semibold"><i class="fas fa-qrcode"></i></button></div>
         </div>
         <div class="grid grid-cols-3 gap-4 mb-5"><div class="glass-card p-5 text-center"><p class="text-3xl font-black text-cyan-400" id="total-refs">0</p><p class="text-sm text-slate-400 mt-2 font-medium">Total Refs</p></div><div class="glass-card p-5 text-center"><p class="text-3xl font-black text-green-400" id="active-refs">0</p><p class="text-sm text-slate-400 mt-2 font-medium">Active</p></div><div class="glass-card p-5 text-center"><p class="text-3xl font-black text-yellow-400">🪙 <span id="ref-earned">0</span></p><p class="text-sm text-slate-400 mt-2 font-medium">Earned</p></div></div>
-        <div class="glass-card p-5"><h3 class="text-card-title mb-4">📈 Multi-Level Stats</h3><div class="space-y-4 text-base"><div class="flex justify-between font-semibold"><span>Level 1 (Direct)</span><span id="level1-stats">0 refs • 0 Pts</span></div><div class="flex justify-between font-semibold"><span>Level 2</span><span id="level2-stats">0 refs • 0 Pts</span></div></div></div>
+        <div class="glass-card p-5"><h3 class="text-card-title mb-4">📈 Multi-Level Stats</h3><div class="space-y-4 text-base"><div class="flex justify-between font-semibold"><span>Level 1 (Direct)</span><span id="level1-stats">0 refs • 0</span></div><div class="flex justify-between font-semibold"><span>Level 2</span><span id="level2-stats">0 refs • 0</span></div></div></div>
       </div>
 
       <div id="notifications-screen" class="screen"><h2 class="text-2xl font-bold mb-5"><i class="fas fa-bell text-yellow-400"></i> Notifications</h2><div id="notifications-list" class="space-y-3"><p class="text-center text-slate-400 py-8">No notifications</p></div></div>
@@ -324,7 +324,6 @@
     function showToast(msg,type='success'){const t=document.getElementById('toast');if(!t){alert(msg);return}t.textContent=msg;t.className='toast toast-'+type;t.style.display='block';setTimeout(()=>t.style.display='none',3000)}
     function updateNotifBadge(c){const b=document.getElementById('notif-badge');if(!b)return;if(c>0){b.textContent=c>99?'99+':c;b.classList.add('show')}else{b.classList.remove('show');b.textContent='0'}}
     
-    // Channel System
     function loadChannelSettings(){db.ref('admin_settings/requiredChannels').on('value',snap=>{State.settings.requiredChannels=snap.val()||[];db.ref('admin_settings/channelCheckEnabled').on('value',s=>{State.settings.channelCheckEnabled=s.val()!==false;if(State.settings.channelCheckEnabled&&State.settings.requiredChannels.length>0)checkChannelsOnStart()})})}
     function checkChannelsOnStart(){const ch=State.settings.requiredChannels;if(!ch||ch.length===0)return;const joined=State.joinedChannels||{};const allJoined=ch.every(c=>joined[c.username]);if(!allJoined)showChannelJoinOverlay(ch)}
     function showChannelJoinOverlay(ch){document.getElementById('channel-list').innerHTML=ch.map((c,i)=>`<div class="channel-card ${State.joinedChannels[c.username]?'joined':''}"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#4F46E5,#06B6D4);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px">${(c.name||c.username||'C')[0].toUpperCase()}</div><div style="text-align:left;flex:1"><p style="font-weight:700;font-size:13px">${c.name||c.username}</p><p style="font-size:10px;color:#94A3B8">@${c.username}</p></div>${State.joinedChannels[c.username]?'<span class="badge badge-success">✅</span>':''}</div>${!State.joinedChannels[c.username]?`<a href="https://t.me/${c.username}" target="_blank" class="gradient-btn" style="width:100%;justify-content:center;text-decoration:none;padding:8px"><i class="fab fa-telegram mr-2"></i>Join @${c.username}</a>`:`<button class="btn btn-green btn-sm" style="width:100%;justify-content:center" disabled>✅ Joined</button>`}</div>`).join('');document.getElementById('channel-join-overlay').classList.add('active')}
@@ -341,21 +340,182 @@
     function openMonetagAd(){document.getElementById('monetag-ad-container').classList.add('active');adSec=14;document.getElementById('timer-seconds').textContent=adSec;if(typeof window.show_11254306==='function')window.show_11254306();if(adTimer)clearInterval(adTimer);adTimer=setInterval(()=>{adSec--;document.getElementById('timer-seconds').textContent=adSec;if(adSec<=0){clearInterval(adTimer);payReward()}},1000)}
     function payReward(){const r=State.settings.perAdReward;State.balance+=r;State.todayEarnings+=r;State.totalEarned+=r;State.dailyAdsWatched++;updateBalanceUI();updateAdsLimitUI();db.ref('users/'+State.userId).update({balance:State.balance,todayEarnings:State.todayEarnings,totalEarned:State.totalEarned,dailyAdsWatched:State.dailyAdsWatched});document.getElementById('ad-timer').style.display='none';document.getElementById('ad-reward-notice').style.display='block';setTimeout(()=>{document.getElementById('monetag-ad-container').classList.remove('active')},3000)}
 
-    function loadSettings(){db.ref('admin_settings').on('value',snap=>{const d=snap.val()||{};State.settings.perAdReward=d.perAdReward||5;State.settings.minWithdraw=d.minWithdraw||840;State.settings.maxWithdraw=d.maxWithdraw||42000;State.settings.requiredRefs=d.requiredRefs||0;State.settings.dailyAdsLimit=d.dailyAdsLimit||20;State.settings.processingTime=d.processingTime||48;State.settings.withdrawMethods=d.withdrawMethods||['bkash','nagad','rocket','usdt'];State.settings.pointToBdt=d.pointToBdt||0.012;State.settings.requiredChannels=d.requiredChannels||[];State.settings.channelCheckEnabled=d.channelCheckEnabled!==false;updateSettingsUI()})}
-    function updateSettingsUI(){document.getElementById('withdraw-methods').innerHTML=State.settings.withdrawMethods.map(m=>{const iu=METHOD_ICONS[m]||'';const ih=iu?`<img src="${iu}" alt="${m}" class="method-icon" onerror="this.style.display='none'">`:`<i class="fas fa-money-bill text-lg"></i>`;return`<button onclick="handleWithdrawMethod('${m}')" class="p-3 bg-slate-700/50 border-2 border-slate-600/30 rounded-2xl text-base font-semibold method-btn flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">${ih}</div>${m.toUpperCase()}</button>`}).join('');document.getElementById('conversion-rate-text').textContent='1 Point = ৳'+(State.settings.pointToBdt||0.012).toFixed(3);updateAdsLimitUI();updatePointConversion()}
-    function updateAdsLimitUI(){const l=State.settings.dailyAdsLimit||20,w=State.dailyAdsWatched||0;document.getElementById('ads-watched-display').textContent=w+' / '+l;document.getElementById('ads-progress-bar').style.width=Math.min((w/l)*100,100)+'%';document.getElementById('ads-remaining-text').textContent=Math.max(l-w,0)}
-    function updateBalanceUI(){const b=State.balance.toLocaleString();['balance','wallet-balance','available-balance'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=b});document.getElementById('today-earnings').textContent='+'+State.todayEarnings.toLocaleString()+' Pts';document.getElementById('total-earned').textContent=State.totalEarned.toLocaleString()+' Pts';document.getElementById('wallet-balance-bdt').textContent=(State.balance*(State.settings.pointToBdt||0.012)).toFixed(2)}
-    function updateProfileUI(){const n=(State.user.firstName+' '+State.user.lastName).trim()||'User';document.getElementById('profile-name').textContent=n;document.getElementById('profile-username').textContent='@'+(State.user.username||'user');document.getElementById('profile-id').textContent=State.userId||'---';const pic=State.user.photoUrl||'https://api.dicebear.com/7.x/avataaars/svg?seed='+(State.userId||'default');document.getElementById('profile-pic-header').src=pic;document.getElementById('profile-pic-large').src=pic;document.getElementById('referral-link').textContent=getReferralLink();document.getElementById('total-refs').textContent=State.totalRefs;document.getElementById('active-refs').textContent=State.activeRefs;document.getElementById('ref-earned').textContent=State.referralEarnings.toLocaleString();document.getElementById('level1-stats').textContent=(State.totalRefs||0)+' refs • '+(State.referralEarnings||0).toLocaleString()+' Pts';document.getElementById('level2-stats').textContent='0 refs • 0 Pts'}
+    // ============ FIXED: Settings load & update ============
+    function loadSettings(){
+      db.ref('admin_settings').on('value',snap=>{
+        const d=snap.val()||{};
+        State.settings.perAdReward=d.perAdReward||5;
+        State.settings.minWithdraw=d.minWithdraw||840;
+        State.settings.maxWithdraw=d.maxWithdraw||42000;
+        State.settings.requiredRefs=d.requiredRefs||0;
+        State.settings.dailyAdsLimit=d.dailyAdsLimit||20;
+        State.settings.processingTime=d.processingTime||48;
+        State.settings.withdrawMethods=d.withdrawMethods||['bkash','nagad','rocket','usdt'];
+        State.settings.pointToBdt=d.pointToBdt||0.012;
+        State.settings.requiredChannels=d.requiredChannels||[];
+        State.settings.channelCheckEnabled=d.channelCheckEnabled!==false;
+        updateSettingsUI();
+      });
+    }
 
-    function loadTasks(){db.ref('tasks').on('value',snap=>{const t=snap.val();const tc=document.getElementById('tasks-container');const oc=document.getElementById('offerwall-container');if(!t){tc.innerHTML='<p class="text-slate-400 text-center py-8">No tasks</p>';oc.innerHTML='<p class="text-slate-400 text-center py-8">No offers</p>';return}const dT=Object.entries(t).filter(([_,x])=>x.type==='daily');const oT=Object.entries(t).filter(([_,x])=>x.type==='offerwall');tc.innerHTML=dT.length?dT.map(([id,x])=>{const comp=State.completedTasks&&State.completedTasks[id];return`<div class="glass-card p-5 ${comp?'opacity-60':''}"><div class="flex justify-between items-start mb-3"><div class="flex items-start gap-4"><div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center overflow-hidden">${getTaskIconHTML(x.icon)}</div><div><p class="text-task-title">${x.title}</p><p class="text-sm text-slate-400 mt-1">Reward: ${x.reward} Pts</p></div></div>${comp?'<span class="badge badge-success">✓ Done</span>':''}</div><button onclick="doTask('${id}',${x.reward},'${x.title.replace(/'/g,"\\'")}')" class="gradient-btn w-full btn-md rounded-2xl" ${comp?'disabled':''}>${comp?'✅ Completed':'Complete & Earn '+x.reward+' Pts'}</button></div>`}).join(''):'<p class="text-slate-400 text-center py-8">No tasks</p>';oc.innerHTML=oT.length?oT.map(([id,x])=>{const comp=State.completedTasks&&State.completedTasks[id];return`<div class="glass-card p-5 flex items-center gap-4 ${comp?'opacity-60':''}"><div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center text-2xl overflow-hidden">${getOfferwallIconHTML(x.icon)}</div><div class="flex-1"><p class="text-task-title">${x.title}</p><div class="flex gap-4 text-sm text-slate-400 mt-2"><span class="font-semibold"><i class="fas fa-coins text-yellow-400"></i> ${x.reward} Pts</span></div></div><button onclick="doTask('${id}',${x.reward},'${x.title.replace(/'/g,"\\'")}')" class="gradient-btn px-6 py-3 rounded-2xl text-base font-bold" ${comp?'disabled':''}>${comp?'✓ Done':'Start'}</button></div>`}).join(''):'<p class="text-slate-400 text-center py-8">No offers</p>'})}
-    function doTask(id,reward,title){if(State.completedTasks[id]){alert('⚠️ Already completed!');return}State.completedTasks[id]=true;State.balance+=reward;State.todayEarnings+=reward;State.totalEarned+=reward;updateBalanceUI();db.ref('users/'+State.userId).update({balance:State.balance,todayEarnings:State.todayEarnings,totalEarned:State.totalEarned});db.ref('users/'+State.userId+'/completedTasks/'+id).set(true);db.ref('users/'+State.userId+'/transactions').push({type:'credit',amount:reward,description:'✅ '+title,date:new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})});alert('✅ +'+reward+' Pts')}
+    function updateSettingsUI(){
+      // Update ad reward text
+      document.getElementById('ad-reward-text').textContent='Earn '+State.settings.perAdReward+'/Ad';
+      document.getElementById('ad-reward-display').textContent=State.settings.perAdReward;
+      document.getElementById('ad-reward-done').textContent=State.settings.perAdReward;
+      
+      // Update withdraw form placeholders
+      document.getElementById('withdraw-amount').placeholder='Min: '+State.settings.minWithdraw.toLocaleString()+' | Max: '+State.settings.maxWithdraw.toLocaleString();
+      document.getElementById('withdraw-info').innerHTML='Available: 🪙 <span id="available-balance">'+State.balance.toLocaleString()+'</span> • Processing: '+State.settings.processingTime+' hours';
+      
+      // Update withdraw methods with icons
+      document.getElementById('withdraw-methods').innerHTML=State.settings.withdrawMethods.map(m=>{
+        const iu=METHOD_ICONS[m]||'';
+        const ih=iu?`<img src="${iu}" alt="${m}" class="method-icon" onerror="this.style.display='none'">`:`<i class="fas fa-money-bill text-lg"></i>`;
+        return`<button onclick="handleWithdrawMethod('${m}')" class="p-3 bg-slate-700/50 border-2 border-slate-600/30 rounded-2xl text-base font-semibold method-btn flex items-center gap-3"><div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center overflow-hidden">${ih}</div>${m.toUpperCase()}</button>`;
+      }).join('');
+      
+      // Update conversion rate
+      document.getElementById('conversion-rate-text').textContent='1 = ৳'+(State.settings.pointToBdt||0.012).toFixed(3);
+      
+      updateAdsLimitUI();
+      updatePointConversion();
+    }
 
-    function loadUser(uid){db.ref('users/'+uid).on('value',snap=>{const d=snap.val();if(d){State.balance=d.balance||0;State.todayEarnings=d.todayEarnings||0;State.totalEarned=d.totalEarned||0;State.referralEarnings=d.referralEarnings||0;State.totalRefs=d.totalRefs||0;State.activeRefs=d.activeRefs||0;State.referralCode=d.referralCode||('ref'+(uid.replace('tg_','')));State.isDarkMode=d.theme!=='light';State.completedTasks=d.completedTasks||{};State.dailyAdsWatched=d.dailyAdsWatched||0;State.createdAt=d.createdAt||'';State.joinedChannels=d.joinedChannels||{};if(!State.user.firstName)State.user.firstName=d.firstName||'';if(!State.user.lastName)State.user.lastName=d.lastName||'';if(!State.user.username)State.user.username=d.username||'';if(!State.user.photoUrl)State.user.photoUrl=d.photoUrl||'';updateBalanceUI();updateProfileUI();updateAdsLimitUI();document.getElementById('main-body').classList.toggle('light-mode',!State.isDarkMode);document.getElementById('loading-overlay').style.display='none';checkChannelsOnStart()}});db.ref('users/'+uid+'/transactions').on('value',snap=>{const tx=snap.val();const c=document.getElementById('transaction-history');if(!tx){c.innerHTML='<p class="text-slate-400 text-sm text-center py-4">No transactions</p>';return}const arr=Object.values(tx).reverse();c.innerHTML=arr.slice(0,30).map(t=>`<div class="flex justify-between items-center pb-4 border-b-2 border-slate-700/50"><div><p class="font-semibold">${t.description}</p><p class="text-sm text-slate-400 mt-1">${t.date}</p></div><span class="${t.type==='credit'?'text-green-400':'text-red-400'} font-bold text-lg">${t.type==='credit'?'+':'-'}${t.amount.toLocaleString()} Pts</span></div>`).join('')||'<p class="text-slate-400 text-sm">No transactions</p>'})}
-    function createUser(uid){return db.ref('users/'+uid).set({firstName:State.user.firstName,lastName:State.user.lastName,username:State.user.username,photoUrl:State.user.photoUrl,balance:50,todayEarnings:50,totalEarned:50,referralEarnings:0,totalRefs:0,activeRefs:0,completedTasks:{},dailyAdsWatched:0,referralCode:State.referralCode,theme:'dark',createdAt:new Date().toISOString(),joinedChannels:{}})}
+    function updateAdsLimitUI(){
+      const l=State.settings.dailyAdsLimit||20,w=State.dailyAdsWatched||0;
+      document.getElementById('ads-watched-display').textContent=w+' / '+l;
+      document.getElementById('ads-progress-bar').style.width=Math.min((w/l)*100,100)+'%';
+      document.getElementById('ads-remaining-text').textContent=Math.max(l-w,0);
+    }
+
+    // ============ FIXED: Member Since ============
+    function updateMemberSince(){
+      console.log('📅 updateMemberSince called, createdAt:', State.createdAt);
+      if(State.createdAt){
+        const created=new Date(State.createdAt);
+        const now=new Date();
+        const diffTime=Math.abs(now-created);
+        const diffDays=Math.ceil(diffTime/(1000*60*60*24));
+        const options={year:'numeric',month:'long',day:'numeric'};
+        document.getElementById('member-since-date').textContent=created.toLocaleDateString('en-US',options);
+        document.getElementById('member-days').textContent=diffDays;
+      } else {
+        document.getElementById('member-since-date').textContent='Joining...';
+        document.getElementById('member-days').textContent='0';
+      }
+    }
+
+    function updateBalanceUI(){
+      const b=State.balance.toLocaleString();
+      ['balance','wallet-balance','available-balance'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=b});
+      document.getElementById('today-earnings').textContent='+'+State.todayEarnings.toLocaleString();
+      document.getElementById('total-earned').textContent=State.totalEarned.toLocaleString();
+      document.getElementById('referral-earnings').textContent=State.referralEarnings.toLocaleString();
+      document.getElementById('wallet-balance-bdt').textContent=(State.balance*(State.settings.pointToBdt||0.012)).toFixed(2);
+    }
+
+    function updateProfileUI(){
+      const n=(State.user.firstName+' '+State.user.lastName).trim()||'User';
+      document.getElementById('profile-name').textContent=n;
+      document.getElementById('profile-username').textContent='@'+(State.user.username||'user');
+      document.getElementById('profile-id').textContent=State.userId||'---';
+      const pic=State.user.photoUrl||'https://api.dicebear.com/7.x/avataaars/svg?seed='+(State.userId||'default');
+      document.getElementById('profile-pic-header').src=pic;
+      document.getElementById('profile-pic-large').src=pic;
+      document.getElementById('referral-link').textContent=getReferralLink();
+      document.getElementById('total-refs').textContent=State.totalRefs;
+      document.getElementById('active-refs').textContent=State.activeRefs;
+      document.getElementById('ref-earned').textContent=State.referralEarnings.toLocaleString();
+      document.getElementById('level1-stats').textContent=(State.totalRefs||0)+' refs • '+(State.referralEarnings||0).toLocaleString();
+      document.getElementById('level2-stats').textContent='0 refs • 0';
+    }
+
+    function loadTasks(){
+      db.ref('tasks').on('value',snap=>{
+        const t=snap.val();const tc=document.getElementById('tasks-container');const oc=document.getElementById('offerwall-container');
+        if(!t){tc.innerHTML='<p class="text-slate-400 text-center py-8">No tasks</p>';oc.innerHTML='<p class="text-slate-400 text-center py-8">No offers</p>';return}
+        const dT=Object.entries(t).filter(([_,x])=>x.type==='daily');const oT=Object.entries(t).filter(([_,x])=>x.type==='offerwall');
+        tc.innerHTML=dT.length?dT.map(([id,x])=>{const comp=State.completedTasks&&State.completedTasks[id];return`<div class="glass-card p-5 ${comp?'opacity-60':''}"><div class="flex justify-between items-start mb-3"><div class="flex items-start gap-4"><div class="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center overflow-hidden">${getTaskIconHTML(x.icon)}</div><div><p class="text-task-title">${x.title}</p><p class="text-sm text-slate-400 mt-1">Reward: ${x.reward}</p></div></div>${comp?'<span class="badge badge-success">✓ Done</span>':''}</div><button onclick="doTask('${id}',${x.reward},'${x.title.replace(/'/g,"\\'")}')" class="gradient-btn w-full btn-md rounded-2xl" ${comp?'disabled':''}>${comp?'✅ Completed':'Complete & Earn '+x.reward}</button></div>`}).join(''):'<p class="text-slate-400 text-center py-8">No tasks</p>';
+        oc.innerHTML=oT.length?oT.map(([id,x])=>{const comp=State.completedTasks&&State.completedTasks[id];return`<div class="glass-card p-5 flex items-center gap-4 ${comp?'opacity-60':''}"><div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center text-2xl overflow-hidden">${getOfferwallIconHTML(x.icon)}</div><div class="flex-1"><p class="text-task-title">${x.title}</p><div class="flex gap-4 text-sm text-slate-400 mt-2"><span class="font-semibold"><i class="fas fa-coins text-yellow-400"></i> ${x.reward}</span></div></div><button onclick="doTask('${id}',${x.reward},'${x.title.replace(/'/g,"\\'")}')" class="gradient-btn px-6 py-3 rounded-2xl text-base font-bold" ${comp?'disabled':''}>${comp?'✓ Done':'Start'}</button></div>`}).join(''):'<p class="text-slate-400 text-center py-8">No offers</p>';
+      });
+    }
+
+    function doTask(id,reward,title){if(State.completedTasks[id]){alert('⚠️ Already completed!');return}State.completedTasks[id]=true;State.balance+=reward;State.todayEarnings+=reward;State.totalEarned+=reward;updateBalanceUI();db.ref('users/'+State.userId).update({balance:State.balance,todayEarnings:State.todayEarnings,totalEarned:State.totalEarned});db.ref('users/'+State.userId+'/completedTasks/'+id).set(true);db.ref('users/'+State.userId+'/transactions').push({type:'credit',amount:reward,description:'✅ '+title,date:new Date().toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})});alert('✅ +'+reward)}
+
+    // ============ FIXED: loadUser now properly updates member since ============
+    function loadUser(uid){
+      db.ref('users/'+uid).on('value',snap=>{
+        const d=snap.val();
+        if(d){
+          State.balance=d.balance||0;
+          State.todayEarnings=d.todayEarnings||0;
+          State.totalEarned=d.totalEarned||0;
+          State.referralEarnings=d.referralEarnings||0;
+          State.totalRefs=d.totalRefs||0;
+          State.activeRefs=d.activeRefs||0;
+          State.referralCode=d.referralCode||('ref'+(uid.replace('tg_','')));
+          State.isDarkMode=d.theme!=='light';
+          State.completedTasks=d.completedTasks||{};
+          State.dailyAdsWatched=d.dailyAdsWatched||0;
+          State.createdAt=d.createdAt||'';
+          State.joinedChannels=d.joinedChannels||{};
+          if(!State.user.firstName)State.user.firstName=d.firstName||'';
+          if(!State.user.lastName)State.user.lastName=d.lastName||'';
+          if(!State.user.username)State.user.username=d.username||'';
+          if(!State.user.photoUrl)State.user.photoUrl=d.photoUrl||'';
+          
+          updateBalanceUI();
+          updateProfileUI();
+          updateAdsLimitUI();
+          updateMemberSince(); // FIXED: Now called after createdAt is set
+          document.getElementById('main-body').classList.toggle('light-mode',!State.isDarkMode);
+          document.getElementById('loading-overlay').style.display='none';
+          checkChannelsOnStart();
+        }
+      });
+      db.ref('users/'+uid+'/transactions').on('value',snap=>{
+        const tx=snap.val();const c=document.getElementById('transaction-history');
+        if(!tx){c.innerHTML='<p class="text-slate-400 text-sm text-center py-4">No transactions</p>';return}
+        const arr=Object.values(tx).reverse();
+        c.innerHTML=arr.slice(0,30).map(t=>`<div class="flex justify-between items-center pb-4 border-b-2 border-slate-700/50"><div><p class="font-semibold">${t.description}</p><p class="text-sm text-slate-400 mt-1">${t.date}</p></div><span class="${t.type==='credit'?'text-green-400':'text-red-400'} font-bold text-lg">${t.type==='credit'?'+':'-'}${t.amount.toLocaleString()}</span></div>`).join('')||'<p class="text-slate-400 text-sm">No transactions</p>';
+      });
+    }
+
+    function createUser(uid){
+      return db.ref('users/'+uid).set({
+        firstName:State.user.firstName,lastName:State.user.lastName,username:State.user.username,photoUrl:State.user.photoUrl,
+        balance:50,todayEarnings:50,totalEarned:50,referralEarnings:0,totalRefs:0,activeRefs:0,completedTasks:{},dailyAdsWatched:0,
+        referralCode:State.referralCode,theme:'dark',createdAt:new Date().toISOString(),joinedChannels:{}
+      });
+    }
+    
     function getTelegramUser(){if(window.Telegram?.WebApp?.initDataUnsafe?.user){const u=window.Telegram.WebApp.initDataUnsafe.user;return{id:u.id,firstName:u.first_name||'',lastName:u.last_name||'',username:u.username||'',photoUrl:u.photo_url||''}}return null}
-    function initAuth(){const tg=getTelegramUser();if(tg){State.userId='tg_'+tg.id;State.user.firstName=tg.firstName;State.user.lastName=tg.lastName;State.user.username=tg.username||('user'+tg.id);State.user.photoUrl=tg.photoUrl||('https://api.dicebear.com/7.x/avataaars/svg?seed='+tg.id);State.referralCode='ref'+tg.id}else{State.userId='tg_123456789';State.user.firstName='John';State.user.lastName='Doe';State.user.username='fastuser';State.user.photoUrl='https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner';State.referralCode='ref123456'}updateProfileUI();updateBalanceUI();if(window.Telegram?.WebApp){window.Telegram.WebApp.ready();window.Telegram.WebApp.expand()}db.ref('users/'+State.userId).once('value').then(s=>{if(!s.exists())createUser(State.userId).then(()=>{loadUser(State.userId);loadNotifications()});else{loadUser(State.userId);loadNotifications()}}).catch(()=>document.getElementById('loading-overlay').style.display='none')}
 
-    const screens={dashboard:'dashboard-screen',tasks:'tasks-screen',wallet:'wallet-screen',withdraw:'withdraw-screen',referral:'referral-screen',notifications:'notifications-screen',profile:'profile-screen'};const sc={};const ni=[];
+    function initAuth(){
+      const tg=getTelegramUser();
+      if(tg){
+        State.userId='tg_'+tg.id;
+        State.user.firstName=tg.firstName;State.user.lastName=tg.lastName;
+        State.user.username=tg.username||('user'+tg.id);
+        State.user.photoUrl=tg.photoUrl||('https://api.dicebear.com/7.x/avataaars/svg?seed='+tg.id);
+        State.referralCode='ref'+tg.id;
+      }else{
+        State.userId='tg_123456789';
+        State.user.firstName='John';State.user.lastName='Doe';
+        State.user.username='fastuser';State.user.photoUrl='https://api.dicebear.com/7.x/avataaars/svg?seed=FastEarner';
+        State.referralCode='ref123456';
+      }
+      updateProfileUI();updateBalanceUI();
+      if(window.Telegram?.WebApp){window.Telegram.WebApp.ready();window.Telegram.WebApp.expand()}
+      db.ref('users/'+State.userId).once('value').then(s=>{
+        if(!s.exists())createUser(State.userId).then(()=>{loadUser(State.userId);loadNotifications()});
+        else{loadUser(State.userId);loadNotifications()}
+      }).catch(()=>document.getElementById('loading-overlay').style.display='none');
+    }
+
+    const screens={dashboard:'dashboard-screen',tasks:'tasks-screen',wallet:'wallet-screen',withdraw:'withdraw-screen',referral:'referral-screen',notifications:'notifications-screen',profile:'profile-screen'};
+    const sc={};const ni=[];
     function preload(){Object.values(screens).forEach(id=>{sc[id]=document.getElementById(id)});document.querySelectorAll('.nav-item').forEach(item=>{ni.push(item)})}
     function navigateTo(key){if(!key)return;Object.values(sc).forEach(s=>{if(s)s.classList.remove('active')});const t=sc[screens[key]];if(t){t.classList.add('active');ni.forEach(i=>{i.classList.remove('active');if(i.dataset.screen===key)i.classList.add('active')});if(key==='withdraw'){document.getElementById('available-balance').textContent=State.balance.toLocaleString();updateSettingsUI()}window.scrollTo({top:0,behavior:'instant'})}}
 
